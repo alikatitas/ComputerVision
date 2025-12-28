@@ -1,0 +1,67 @@
+Tespit Edilen Sınıf Sayısı: 237
+Örnek Sınıflar: ['Apple 10', 'Apple 11', 'Apple 12', 'Apple 13', 'Apple 14'] ...
+
+--- Training Verileri Yükleniyor ---
+[10/237] 'Apple 6' sınıfı işlendi. (Geçen süre: 244.5 sn)
+[20/237] 'Apple Granny Smith 1' sınıfı işlendi. (Geçen süre: 468.0 sn)
+[30/237] 'Apple worm 1' sınıfı işlendi. (Geçen süre: 677.8 sn)
+[40/237] 'Banana Lady Finger 1' sınıfı işlendi. (Geçen süre: 870.8 sn)
+[50/237] 'Cabbage white 1' sınıfı işlendi. (Geçen süre: 1016.6 sn)
+[60/237] 'Cherimoya 1' sınıfı işlendi. (Geçen süre: 1249.5 sn)
+[70/237] 'Cherry Wax Black 1' sınıfı işlendi. (Geçen süre: 1527.4 sn)
+[80/237] 'Corn 1' sınıfı işlendi. (Geçen süre: 1706.6 sn)
+[90/237] 'Cucumber 8' sınıfı işlendi. (Geçen süre: 1915.5 sn)
+[100/237] 'Gooseberry 1' sınıfı işlendi. (Geçen süre: 2090.7 sn)
+[110/237] 'Grapefruit White 1' sınıfı işlendi. (Geçen süre: 2298.5 sn)
+[120/237] 'Limes 1' sınıfı işlendi. (Geçen süre: 2493.3 sn)
+[130/237] 'Nectarine Flat 1' sınıfı işlendi. (Geçen süre: 2678.5 sn)
+[140/237] 'Onion Red 1' sınıfı işlendi. (Geçen süre: 2833.8 sn)
+[150/237] 'Peach 2' sınıfı işlendi. (Geçen süre: 3035.7 sn)
+[160/237] 'Pear 13' sınıfı işlendi. (Geçen süre: 3299.2 sn)
+[170/237] 'Pear Kaiser 1' sınıfı işlendi. (Geçen süre: 3530.8 sn)
+[180/237] 'Pepper Red 1' sınıfı işlendi. (Geçen süre: 3758.8 sn)
+[190/237] 'Pistachio 1' sınıfı işlendi. (Geçen süre: 3973.0 sn)
+[200/237] 'Potato Sweet 1' sınıfı işlendi. (Geçen süre: 4180.2 sn)
+[210/237] 'Strawberry 1' sınıfı işlendi. (Geçen süre: 4399.0 sn)
+[220/237] 'Tomato 7' sınıfı işlendi. (Geçen süre: 4652.2 sn)
+[230/237] 'Tomato Maroon 2' sınıfı işlendi. (Geçen süre: 4839.0 sn)
+[237/237] 'Zucchini dark 1' sınıfı işlendi. (Geçen süre: 4953.3 sn)
+-> Toplam Eğitim Verisi: 124716 adet.
+
+--- Test Verileri Yükleniyor ---
+[10/237] 'Apple 6' sınıfı işlendi. (Geçen süre: 76.6 sn)
+[20/237] 'Apple Granny Smith 1' sınıfı işlendi. (Geçen süre: 153.0 sn)
+[30/237] 'Apple worm 1' sınıfı işlendi. (Geçen süre: 228.8 sn)
+[40/237] 'Banana Lady Finger 1' sınıfı işlendi. (Geçen süre: 292.3 sn)
+[50/237] 'Cabbage white 1' sınıfı işlendi. (Geçen süre: 339.8 sn)
+[60/237] 'Cherimoya 1' sınıfı işlendi. (Geçen süre: 409.9 sn)
+[70/237] 'Cherry Wax Black 1' sınıfı işlendi. (Geçen süre: 494.6 sn)
+[80/237] 'Corn 1' sınıfı işlendi. (Geçen süre: 563.9 sn)
+[90/237] 'Cucumber 8' sınıfı işlendi. (Geçen süre: 637.9 sn)
+[100/237] 'Gooseberry 1' sınıfı işlendi. (Geçen süre: 696.6 sn)
+[110/237] 'Grapefruit White 1' sınıfı işlendi. (Geçen süre: 769.0 sn)
+[120/237] 'Limes 1' sınıfı işlendi. (Geçen süre: 834.3 sn)
+[130/237] 'Nectarine Flat 1' sınıfı işlendi. (Geçen süre: 899.2 sn)
+[140/237] 'Onion Red 1' sınıfı işlendi. (Geçen süre: 955.5 sn)
+[150/237] 'Peach 2' sınıfı işlendi. (Geçen süre: 1024.9 sn)
+[160/237] 'Pear 13' sınıfı işlendi. (Geçen süre: 1110.3 sn)
+[170/237] 'Pear Kaiser 1' sınıfı işlendi. (Geçen süre: 1189.3 sn)
+[180/237] 'Pepper Red 1' sınıfı işlendi. (Geçen süre: 1265.1 sn)
+[190/237] 'Pistachio 1' sınıfı işlendi. (Geçen süre: 1332.6 sn)
+[200/237] 'Potato Sweet 1' sınıfı işlendi. (Geçen süre: 1402.7 sn)
+[210/237] 'Strawberry 1' sınıfı işlendi. (Geçen süre: 1485.7 sn)
+[220/237] 'Tomato 7' sınıfı işlendi. (Geçen süre: 1573.1 sn)
+[230/237] 'Tomato Maroon 2' sınıfı işlendi. (Geçen süre: 1637.0 sn)
+[237/237] 'Zucchini dark 1' sınıfı işlendi. (Geçen süre: 1676.0 sn)
+-> Toplam Test Verisi: 41577 adet.
+
+SVM Modeli 'Training' verisi ile eğitiliyor...
+
+'Test' verisi üzerinde tahmin yapılıyor...
+
+==========================================
+GENEL BAŞARI (Accuracy): %96.62
+==========================================
+
+Çok fazla sınıf olduğu için grafik çizdirilmedi.
+Ancak genel doğruluk oranı, Test klasöründeki verilerle Training verilerinin başarısını yansıtır.

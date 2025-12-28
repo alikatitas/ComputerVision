@@ -1,0 +1,185 @@
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Apple Red 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Apple Rotten 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Apple Red 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Apple Rotten 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 980 görüntü
+Test Seti: 326 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %86.20
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       0.78      1.00      0.88       164
+Kusurlu/Farklı (Sınıf 2)       1.00      0.72      0.84       162
+
+                accuracy                           0.86       326
+               macro avg       0.89      0.86      0.86       326
+            weighted avg       0.89      0.86      0.86       326
+
+------------------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Apple Golden 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Apple Braeburn 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Apple Golden 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Apple Braeburn 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 972 görüntü
+Test Seti: 324 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %100.00
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       1.00      1.00      1.00       160
+Kusurlu/Farklı (Sınıf 2)       1.00      1.00      1.00       164
+
+                accuracy                           1.00       324
+               macro avg       1.00      1.00      1.00       324
+            weighted avg       1.00      1.00      1.00       324
+---------------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Tomato 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Tomato Yellow 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Tomato 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Tomato Yellow 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 1197 görüntü
+Test Seti: 399 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %100.00
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       1.00      1.00      1.00       246
+Kusurlu/Farklı (Sınıf 2)       1.00      1.00      1.00       153
+
+                accuracy                           1.00       399
+               macro avg       1.00      1.00      1.00       399
+            weighted avg       1.00      1.00      1.00       399
+---------------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Lemon 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Limes 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Lemon 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Limes 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 982 görüntü
+Test Seti: 330 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %74.24
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       0.66      1.00      0.79       164
+Kusurlu/Farklı (Sınıf 2)       1.00      0.49      0.66       166
+
+                accuracy                           0.74       330
+               macro avg       0.83      0.74      0.73       330
+            weighted avg       0.83      0.74      0.72       330
+-----------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Banana 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Banana Lady Finger 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Banana 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Banana Lady Finger 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 940 görüntü
+Test Seti: 318 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %69.18
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       0.67      0.80      0.73       166
+Kusurlu/Farklı (Sınıf 2)       0.72      0.57      0.64       152
+
+                accuracy                           0.69       318
+               macro avg       0.70      0.69      0.69       318
+            weighted avg       0.70      0.69      0.69       318
+-----------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Zucchini 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Zucchini Green 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Zucchini 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Zucchini Green 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 384 görüntü
+Test Seti: 127 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %100.00
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       1.00      1.00      1.00        80
+Kusurlu/Farklı (Sınıf 2)       1.00      1.00      1.00        47
+
+                accuracy                           1.00       127
+               macro avg       1.00      1.00      1.00       127
+            weighted avg       1.00      1.00      1.00       127
+------------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Avocado 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Avocado ripe 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Avocado 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Avocado ripe 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 918 görüntü
+Test Seti: 309 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %100.00
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       1.00      1.00      1.00       143
+Kusurlu/Farklı (Sınıf 2)       1.00      1.00      1.00       166
+
+                accuracy                           1.00       309
+               macro avg       1.00      1.00      1.00       309
+            weighted avg       1.00      1.00      1.00       309
+------------------------------------------------------------------
+--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---
+Training verisi yükleniyor: Tomato Cherry Orange 1 (Sağlam olarak etiketlendi)...
+Training verisi yükleniyor: Tomato Cherry Maroon 1 (Kusurlu olarak etiketlendi)...
+Test verisi yükleniyor: Tomato Cherry Orange 1 (Sağlam olarak etiketlendi)...
+Test verisi yükleniyor: Tomato Cherry Maroon 1 (Kusurlu olarak etiketlendi)...
+
+Eğitim Seti: 604 görüntü
+Test Seti: 200 görüntü
+
+SVM Modeli (Kernel='rbf') Eğitiliyor...
+
+AYIRT ETME BAŞARISI: %98.50
+
+Detaylı Rapor:
+                          precision    recall  f1-score   support
+
+        Sağlam (Sınıf 1)       0.97      1.00      0.99       100
+Kusurlu/Farklı (Sınıf 2)       1.00      0.97      0.98       100
+
+                accuracy                           0.98       200
+               macro avg       0.99      0.98      0.98       200
+            weighted avg       0.99      0.98      0.98       200
+        
