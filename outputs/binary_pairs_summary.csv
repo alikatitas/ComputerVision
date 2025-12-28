@@ -1,0 +1,9 @@
+﻿timestamp,saglam_sinif,kusurlu_sinif,train_n,test_n,accuracy,precision_pos,recall_pos,f1_pos,cm_png
+2025-12-28T23:44:19,Apple Red 1,Apple Rotten 1,980,326,0.8619631901840491,1.0,0.7222222222222222,0.8387096774193549,outputs\cm_Apple_Red_1__VS__Apple_Rotten_1.png
+2025-12-28T23:44:53,Apple Golden 1,Apple Braeburn 1,972,324,1.0,1.0,1.0,1.0,outputs\cm_Apple_Golden_1__VS__Apple_Braeburn_1.png
+2025-12-28T23:45:34,Tomato 1,Tomato Yellow 1,1197,399,1.0,1.0,1.0,1.0,outputs\cm_Tomato_1__VS__Tomato_Yellow_1.png
+2025-12-28T23:46:07,Lemon 1,Limes 1,982,330,0.7424242424242424,1.0,0.4879518072289157,0.6558704453441295,outputs\cm_Lemon_1__VS__Limes_1.png
+2025-12-28T23:46:39,Banana 1,Banana Lady Finger 1,940,318,0.6918238993710691,0.725,0.5723684210526315,0.6397058823529411,outputs\cm_Banana_1__VS__Banana_Lady_Finger_1.png
+2025-12-28T23:46:53,Zucchini 1,Zucchini Green 1,384,127,1.0,1.0,1.0,1.0,outputs\cm_Zucchini_1__VS__Zucchini_Green_1.png
+2025-12-28T23:47:25,Avocado 1,Avocado ripe 1,918,309,1.0,1.0,1.0,1.0,outputs\cm_Avocado_1__VS__Avocado_ripe_1.png
+2025-12-28T23:47:45,Tomato Cherry Orange 1,Tomato Cherry Maroon 1,604,200,0.985,1.0,0.97,0.9847715736040609,outputs\cm_Tomato_Cherry_Orange_1__VS__Tomato_Cherry_Maroon_1.png

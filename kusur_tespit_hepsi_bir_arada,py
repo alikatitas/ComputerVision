@@ -1,0 +1,274 @@
+import os
+import re
+import glob
+from datetime import datetime
+
+import cv2
+import numpy as np
+import pandas as pd
+from skimage.feature import graycomatrix, graycoprops
+
+from sklearn import svm
+from sklearn.metrics import (
+    accuracy_score, classification_report, confusion_matrix,
+    precision_score, recall_score, f1_score
+)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# =========================================================
+# 0) GENEL AYARLAR (mevcut kusur_tespit.py ile birebir)
+# =========================================================
+ANA_PATH = "fruit-360-dataset"   # Training/ ve Test/ içeren ana klasör
+RESULTS_TXT = "kusur_tespiti_sonuc.txt"  # eski çıktı logu (opsiyonel)
+
+OUT_DIR = "outputs"
+os.makedirs(OUT_DIR, exist_ok=True)
+
+SUMMARY_CSV = os.path.join(OUT_DIR, "binary_pairs_summary.csv")
+
+# Eğer logdan ikili çıkmazsa:
+DEFAULT_PAIRS = [
+    ("Apple Red 1", "Apple Rotten 1"),
+    ("Lemon 1", "Limes 1"),
+    ("Banana 1", "Banana Lady Finger 1"),
+]
+
+# --- GLCM AYARLARI (aynı) ---
+GLCM_DISTANCES = [11]
+GLCM_ANGLES = [0, np.pi / 2]
+GLCM_LEVELS = 256
+
+# --- SVM AYARLARI (aynı) ---
+SVM_KERNEL = "rbf"
+SVM_C = 10
+SVM_GAMMA = "scale"
+
+
+# =========================================================
+# 1) YARDIMCI FONKSİYONLAR
+# =========================================================
+def safe_name(s: str) -> str:
+    return "".join(c if c.isalnum() else "_" for c in s)
+
+def list_images(folder: str):
+    exts = ("*.jpg", "*.jpeg", "*.png", "*.bmp")
+    files = []
+    for e in exts:
+        files.extend(glob.glob(os.path.join(folder, e)))
+    return sorted(files)
+
+
+# =========================================================
+# 2) LOG DOSYASINDAN İKİLİLERİ ÇIKAR (SENİN FORMATA UYGUN)
+# =========================================================
+def parse_pairs_from_results_txt(path: str):
+    """
+    Senin gerçek log formatına göre ikili yakalar:
+
+    Training verisi yükleniyor: Avocado 1 (Sağlam olarak etiketlendi)...
+    Training verisi yükleniyor: Avocado ripe 1 (Kusurlu olarak etiketlendi)...
+    """
+    if not os.path.exists(path):
+        return []
+
+    pairs = []
+    good = None
+    bad = None
+
+    rg_good = re.compile(
+        r"Training verisi yükleniyor:\s*(.+?)\s*\(Sağlam olarak etiketlendi\)",
+        re.IGNORECASE
+    )
+    rg_bad = re.compile(
+        r"Training verisi yükleniyor:\s*(.+?)\s*\(Kusurlu olarak etiketlendi\)",
+        re.IGNORECASE
+    )
+
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            line = line.strip()
+
+            m1 = rg_good.search(line)
+            if m1:
+                good = m1.group(1).strip()
+
+            m2 = rg_bad.search(line)
+            if m2:
+                bad = m2.group(1).strip()
+
+            if good and bad:
+                pairs.append((good, bad))
+                good, bad = None, None
+
+    return list(dict.fromkeys(pairs))
+
+
+# =========================================================
+# 3) ÖZELLİK ÇIKARIMI (AYNI)
+# =========================================================
+def ozellik_cikar(img_path):
+    img = cv2.imread(img_path)
+    if img is None:
+        return None
+
+    # LAB (mean/std) -> 6 özellik
+    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+
+    features = [
+        np.mean(l), np.std(l),
+        np.mean(a), np.std(a),
+        np.mean(b), np.std(b)
+    ]
+
+    # GLCM -> 4 özellik
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    glcm = graycomatrix(
+        gray,
+        distances=GLCM_DISTANCES,
+        angles=GLCM_ANGLES,
+        levels=GLCM_LEVELS,
+        symmetric=True,
+        normed=True
+    )
+
+    features.extend([
+        np.mean(graycoprops(glcm, "contrast")),
+        np.mean(graycoprops(glcm, "energy")),
+        np.mean(graycoprops(glcm, "homogeneity")),
+        np.mean(graycoprops(glcm, "correlation"))
+    ])
+
+    return np.array(features, dtype=np.float32)
+
+
+def veri_yukle(ana_yol, tip, sinif1, sinif2):
+    data, labels = [], []
+
+    base = os.path.join(ana_yol, tip)
+
+    for label, sinif in enumerate([sinif1, sinif2]):
+        class_dir = os.path.join(base, sinif)
+        if not os.path.isdir(class_dir):
+            continue
+
+        for img_path in list_images(class_dir):
+            feat = ozellik_cikar(img_path)
+            if feat is not None:
+                data.append(feat)
+                labels.append(label)
+
+    return np.array(data), np.array(labels)
+
+
+# =========================================================
+# 4) CONFUSION MATRIX KAYDET
+# =========================================================
+def save_cm(cm, labels, title, out_path):
+    plt.figure(figsize=(6, 5))
+    sns.heatmap(cm, annot=True, fmt="d", cmap="Reds",
+                xticklabels=labels, yticklabels=labels)
+    plt.title(title)
+    plt.ylabel("Gerçek")
+    plt.xlabel("Tahmin")
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=200)
+    plt.close()
+
+
+# =========================================================
+# 5) TEK İKİLİYİ ÇALIŞTIR
+# =========================================================
+def run_pair(saglam, kusurlu):
+    print("\n---------------------------------------------------------------------")
+    print("--- KUSUR TESPİTİ / KALİTE SINIFLANDIRMA SİMÜLASYONU ---")
+    print(f"Sağlam sınıf: {saglam}")
+    print(f"Kusurlu sınıf: {kusurlu}")
+
+    X_train, y_train = veri_yukle(ANA_PATH, "Training", saglam, kusurlu)
+    X_test, y_test = veri_yukle(ANA_PATH, "Test", saglam, kusurlu)
+
+    print(f"\nEğitim Seti: {len(X_train)} görüntü")
+    print(f"Test Seti: {len(X_test)} görüntü")
+
+    if len(X_train) == 0 or len(X_test) == 0:
+        print("UYARI: Veri bulunamadı.")
+        return None
+
+    clf = svm.SVC(kernel=SVM_KERNEL, C=SVM_C, gamma=SVM_GAMMA)
+    clf.fit(X_train, y_train)
+
+    y_pred = clf.predict(X_test)
+
+    acc = accuracy_score(y_test, y_pred)
+    print(f"\nAYIRT ETME BAŞARISI: %{acc * 100:.2f}")
+
+    print("\nDetaylı Rapor:")
+    print(classification_report(
+        y_test, y_pred,
+        target_names=["Sağlam", "Kusurlu"],
+        zero_division=0
+    ))
+
+    cm = confusion_matrix(y_test, y_pred)
+    cm_path = os.path.join(
+        OUT_DIR,
+        f"cm_{safe_name(saglam)}__VS__{safe_name(kusurlu)}.png"
+    )
+
+    save_cm(cm, ["Sağlam", "Kusurlu"], f"{saglam} vs {kusurlu}", cm_path)
+
+    return {
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "saglam_sinif": saglam,
+        "kusurlu_sinif": kusurlu,
+        "train_n": len(X_train),
+        "test_n": len(X_test),
+        "accuracy": acc,
+        "precision_pos": precision_score(y_test, y_pred, zero_division=0),
+        "recall_pos": recall_score(y_test, y_pred, zero_division=0),
+        "f1_pos": f1_score(y_test, y_pred, zero_division=0),
+        "cm_png": cm_path
+    }
+
+
+# =========================================================
+# 6) MAIN
+# =========================================================
+def main():
+    pairs = parse_pairs_from_results_txt(RESULTS_TXT)
+
+    if pairs:
+        print(f"[INFO] Log dosyasından {len(pairs)} ikili bulundu.")
+    else:
+        print("[INFO] Logdan ikili bulunamadı, DEFAULT_PAIRS kullanılacak.")
+        pairs = DEFAULT_PAIRS
+
+    results = []
+    for s, k in pairs:
+        r = run_pair(s, k)
+        if r:
+            results.append(r)
+
+    if results:
+        df = pd.DataFrame(results)
+        df.to_csv(SUMMARY_CSV, index=False, encoding="utf-8-sig")
+
+        print("\n=====================================================================")
+        print(f"Özet CSV kaydedildi: {SUMMARY_CSV}")
+        print("=====================================================================")
+
+        print(df[[
+            "saglam_sinif", "kusurlu_sinif",
+            "accuracy", "precision_pos", "recall_pos", "f1_pos",
+            "train_n", "test_n"
+        ]].sort_values("f1_pos", ascending=False).to_string(index=False))
+    else:
+        print("Hiçbir ikili başarıyla çalıştırılamadı.")
+
+
+if __name__ == "__main__":
+    main()
